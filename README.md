@@ -7,7 +7,7 @@ Required
 * USB Hosts Shield mini (perfect for pro mini)
 * USB Hosts Libary - https://github.com/felis/USB_Host_Shield_2.0#how-to-include-the-library
 * PS2 plug (for plugging into the wheel base.)
-* USB Shifter of course. I cant guarentee it will work on all usb shifters. (What I used - ./USBShifter2T300/blob/main/Images/USB%20Shifter.jpg)
+* USB Shifter of course. I cant guarentee it will work on all usb shifters. (What I used - [link](http://example.com "USB Shifter"))
   * You can find these by typing in "USB Shifter" on ebay or aliexpress. Pick the one that suits you.
 
 
