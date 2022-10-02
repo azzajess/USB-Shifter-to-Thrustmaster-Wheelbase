@@ -8,6 +8,7 @@ Required
 * USB Hosts Libary - https://github.com/felis/USB_Host_Shield_2.0#how-to-include-the-library
 * PS2 plug (for plugging into the wheel base.)
 * USB Shifter of course. I cant guarentee it will work on all usb shifters. (What I used - )
+** You can find these by typing in "USB Shifter" on ebay or aliexpress. Pick the one that suits you.
 
 
 
@@ -28,6 +29,6 @@ Thanks to the people at ISRTV.com that did the heavy lifting. Their code was eno
 
 Resources/Reasearch
 * USB Hosts Shield - https://chome.nerpa.tech/usb-host-shield-hardware-manual/
-* USB Host Shield github info + examples - 
+* USB Host Shield github info + examples - https://github.com/felis/USB_Host_Shield_2.0/
 * Alot of the USB Shield Host code came from this example ino - https://github.com/felis/USB_Host_Shield_2.0/blob/master/examples/HID/t16km/t16km.ino#L55
 * ISRTV forum where a lot of the info was from - https://www.isrtv.com/forums/topic/24532-gearbox-connector-on-base/
