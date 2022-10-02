@@ -2,6 +2,7 @@
 Use a Generic USB Shifter to connect to a Thrustmaster wheelbase, Emulating a TH8A shifter
 
 Might work on other wheelbases but have only tested it on a T300 RS GT
+
 IRTV Forums suggest it will also work on TMX wheelbase. It might work on any wheelbase that uses the TH8A PS2 port
 
 
@@ -21,6 +22,7 @@ Basically flash ino file and change code to debug for USB codes in the serial pl
 
 Disclaimer
 Look, this is really hastily put together. I really wasnt happy with the lack of documentation for my dumb brain to comprehend so I used a Shield example that got me 90% of the way there and then piggy backed off that.
+
 Im 100% there is a better way of doing this that is cleaner but it doesnt indeed work. Happy for anyone to provide suggestions improvements and the such!
 
 Included is a refernce folder for additional stuff downloaded from ISRTV.com. The information and .ino files are way to valuable to not have a backup somewhere...
