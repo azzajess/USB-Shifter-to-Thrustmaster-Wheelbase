@@ -1,10 +1,10 @@
 /* 
  *  Based on:
- *  Simplified Thrustmaster T.16000M FCS Joystick Report Parser ()
+ *  Simplified Thrustmaster T.16000M FCS Joystick Report Parser (https://github.com/felis/USB_Host_Shield_2.0/blob/master/examples/HID/t16km/t16km.ino)
  *  &
- *  https://www.isrtv.com/forums/topic/24532-gearbox-connector-on-base/
+ *  People at ISRTV.com - https://www.isrtv.com/forums/topic/24532-gearbox-connector-on-base/
  *  
- *  Modified by azzajess to suit USB Shifter 6+R+Switch ()
+ *  Modified by azzajess to suit USB Shifter 6+R+Switch (https://github.com/azzajess/USB-Shifter-to-Thrustmaster-Wheelbase)
  *  
 */
 
@@ -31,9 +31,9 @@ DIN6_5 /  Vdd          / RAW 3.3V
 DIN6_6 /  Vss          / GND
 */
 
-//commands seen from ociliscope in forum - 
-//appentely these codes have changed for different wheel versions
-//these work for me...
+//commands seen from ociliscope in ISRTV forum - 
+//apparently these codes have changed for different wheel versions however
+//these worked for me...
 byte command[14] = {
   0x00, // Shifter mode 0 - S / 0x80 - H
   0x0C, // Unknown
@@ -51,13 +51,12 @@ byte command[14] = {
   0x00  // Unknown
 };
 
+//Sequential shift
 enum position {
   center = 0x04,
   down = 0x05,
   up = 0x06
 };
-
-//uint16_t gear1 = 000;
 
 // Thrustmaster T.16000M HID report
 struct GamePadEventData
@@ -74,7 +73,6 @@ class JoystickEvents
 {
 public:
   virtual void OnGamePadChanged(const GamePadEventData *evt);
-  //virtual void OnButtonUp(uint8_t but_id);
 };
 
 #define RPT_GAMEPAD_LEN sizeof(GamePadEventData)
@@ -98,24 +96,24 @@ JoystickReportParser::JoystickReportParser(JoystickEvents *evt) :
 
 void JoystickReportParser::Parse(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf)
 {
-/* Original.
+/* Original.  Code caused commands to infinitely loop.
   // Checking if there are changes in report since the method was last called
   // match = true (1) when size of old pan and memcmp = 0
   //  bool match = (sizeof(oldPad) == len) && (memcmp(oldPad, buf, len) == 0);
 */
-  // match is true when memcmp = 0 (basically when nothing is happening it wont loop
+  // match is true when memcmp = 0 (basically if there is no shifting, then its false
+  //so it doesnt infintely loop
   bool match = (memcmp(oldPad, buf, len) == 0);
-  //Serial.println(memcmp(oldPad, buf, len));
-  //  Serial.println(match);
-  //  Serial.println(sizeof(oldPad));
+
 //   Calling Game Pad event handler
-//check if nothing is happening otherwise activate
+//check if nothing is happening otherwise activate commands
   if (!match && joyEvents) {
     joyEvents->OnGamePadChanged((const GamePadEventData*)buf);
     memcpy(oldPad, buf, len);
   }
 }
 
+//H mode shifting codes
 void setHMode(bool isHMode) {
   if (isHMode) {
     command[0] |= 0x80;
@@ -124,18 +122,21 @@ void setHMode(bool isHMode) {
   }
 }
 
+//Switchs gear to specificed gear number and display in serial monitor
 void switchHGear(byte gear) { // Gear num 0-N, 8-R
   command[3] = (0x80 >> (8-gear));
   Serial.print("Gear ");
   Serial.println(gear);
 }
 
+//Switchs gear to specificed gear number and display in serial monitor
 void switchSGear(position currpos) {
   command[4] = currpos;
   Serial.print("SEQ Gear ");
   Serial.println(currpos);
 }
 
+//sends command over PS2 port to T300 wheelbase
 void sendCommand() {
   Wire.beginTransmission(0x01);
   Wire.write(command, 14);
@@ -161,76 +162,107 @@ void JoystickEvents::OnGamePadChanged(const GamePadEventData *evt)
     setHMode(false); // Set to Seq-mode
     switchSGear(up); // Press up in seq
     sendCommand(); 
+
+
+    These numbers are exact codes i get when using debug and shifting in different gears
+    these may be different depending on shifter? 
+    Use debug below these if statements to find them from serial monitor and replace
+    the codes from there
+
 */
-    //These numbers are exact codes i get when using debug and shifting in different gears
-    //these may be different depending on shifter? Use debug to find them out and fill it in
-    if (evt->y == 15){
-      //Neutral/Gear0
+    
+    //Neutral/Gear0    
+    if (evt->y == 15){ 
       setHMode(true);
       switchHGear(0);
       sendCommand();
-    } else if (evt->y == 31){
+    } 
+    
       //Gear 1
+      else if (evt->y == 31){
       setHMode(true);
       switchHGear(1);
       sendCommand();
-      } else if (evt->y == 47){
-      //Gear 2
+      }
+      
+      //Gear 2 
+      else if (evt->y == 47){
       setHMode(true);
       switchHGear(2);
       sendCommand();  
-      } else if (evt->y == 79){
+      } 
+      
       //Gear 3
+      else if (evt->y == 79){
       setHMode(true);
       switchHGear(3);
       sendCommand();
-      } else if (evt->y == 143){
+      } 
+      
       //Gear 4
+      else if (evt->y == 143){
       setHMode(true);
       switchHGear(4);
       sendCommand();
-      } else if (evt->y == 271){
+      } 
+      
       //Gear 5
+      else if (evt->y == 271){
       setHMode(true);
       switchHGear(5);
       sendCommand();
-      } else if (evt->y == 527){
-      //Gear 5
+      } 
+      
+      //Gear 6
+      else if (evt->y == 527){
       setHMode(true);
       switchHGear(6);
       sendCommand();
+      
+//    Gear 7 (My shifter doesnt have 7th gear so this has to be filled out if you have one)
 //    } else if (evt->y == ){
-//      //Gear 7 (My shifter doesnt have 7th gear so this has to be filled out if you have one)
 //      setHMode(true);
 //      switchHGear(7);
 //      sendCommand();
-      } else if (evt->y == 2063){
-      //Gear 8/Reverse
+      } 
+      
+      //Gear 8/Reverse      
+      else if (evt->y == 2063){
       setHMode(true);
       switchHGear(8);
       sendCommand();
       }
+      
       //Switch enable = Sequential mode
       else if (evt->y == 8207) {
       setHMode(false);
       switchSGear(center);
       sendCommand();
       }
+      
+      //Sequential Switch on = Shift up      
       else if (evt->y == 8335) {
-      //Sequential Switch on = Shift up
       setHMode(false);
       switchSGear(up);
       sendCommand();
       }
+      
+      //Sequential Switch on = Shift down
       else if (evt->y == 8271) {
-        //Sequential Switch on = Shift down
       setHMode(false);
       switchSGear(down);
       sendCommand();
       }
 
-//  debug section. I had these all enabled to figure it out then only used the numbers
-//  that had changed from one another and marked them down. For me y: is what changed
+/*
+      Debug/Code Find Section
+      Uncomment the below Code then flash the INO to arduino and connect to Shifter
+      over USB. Then go through each of the gears on Shifter and mark down what
+      each code is for each gear. If you have a switch like I do, then that changes
+      the code of each shift. I used this to havea toggle between sequential and H shift
+      For me, none of the other values had changed except for y:.
+      I used this for the shift detection above.
+*/
 
 //  Serial.print("X: ");
 //  Serial.print(evt->x);
@@ -247,7 +279,8 @@ void JoystickEvents::OnGamePadChanged(const GamePadEventData *evt)
 //  Serial.println();
 
 
-    //or just use this singular (your letter may vary?)
+    //If its easier, just uncomment this for a clener clean debug once you know the only
+    //value that changes is y.
 //    Serial.println(evt->y);
 }
 
@@ -273,7 +306,7 @@ void setup()
   if (!Hid.SetReportParser(0, &Joy))
       ErrorMessage<uint8_t>(PSTR("SetReportParser"), 1  );
 
-   //TH8A (from 
+  //TH8A
   Wire.begin(0x03); // join i2c bus (address optional for master)
   digitalWrite(13, HIGH);
 
