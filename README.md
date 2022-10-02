@@ -1,5 +1,8 @@
-# USBShifter2T300
-Use a Generic USB Shifter to connect to the T300RS GT wheelbase to Emulating a TH8A shifter
+# USB Shifter to Thrustmaster Wheelbase
+Use a Generic USB Shifter to connect to a Thrustmaster wheelbase, Emulating a TH8A shifter
+
+Might work on other wheelbases but have only tested it on a T300 RS GT
+IRTV Forums suggest it will also work on TMX wheelbase. It might work on any wheelbase that uses the TH8A PS2 port
 
 
 Required
@@ -7,7 +10,7 @@ Required
 * USB Hosts Shield mini (perfect for pro mini)
 * USB Hosts Libary - https://github.com/felis/USB_Host_Shield_2.0#how-to-include-the-library
 * PS2 plug (for plugging into the wheel base.)
-* USB Shifter of course. I cant guarentee it will work on all usb shifters. (What I used - [link](https://github.com/azzajess/USBShifter2T300/blob/main/Images/USB%20Shifter.jpg "USB Shifter"))
+* USB Shifter of course. I cant guarentee it will work on all usb shifters. (What I used - [link](Images/USB%20Shifter.jpg "USB Shifter"))
   * You can find these by typing in "USB Shifter" on ebay or aliexpress. Pick the one that suits you.
 
 
