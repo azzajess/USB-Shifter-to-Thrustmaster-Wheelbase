@@ -3,14 +3,14 @@ Use a Generic USB Shifter to connect to a Thrustmaster wheelbase, Emulating a TH
 
 Might work on other wheelbases but have only tested it on a T300 RS GT + PS4 (GT7)
 
-IRTV Forums suggest it will also work on TMX wheelbase. It might work on any wheelbase that uses the TH8A PS2 port
+IRTV Forums suggest it will also work on TMX wheelbase. It might work on any wheelbase that uses the TH8A Mini-Din (PS2) port
 
 
 ## Required
 * Arduino Pro Mini 328 - 3.3V/8MHz (It has to be 3v3 volts to power off of the wheelbase easily)
 * USB Hosts Shield mini (perfect for pro mini)
 * USB Hosts Libary - https://github.com/felis/USB_Host_Shield_2.0#how-to-include-the-library
-* PS2 plug (for plugging into the wheel base.)
+* Mini-Din/PS2 plug (for plugging into the wheel base.)
 * USB Shifter of course. I can't guarantee it will work on all usb shifters. (What I used - [link](Images/USB%20Shifter.jpg "USB Shifter"))
   * You can find these by typing in "USB Shifter" on ebay or aliexpress. Pick the one that suits you.
 
