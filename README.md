@@ -14,6 +14,12 @@ IRTV Forums suggest it will also work on TMX wheelbase. It might work on any whe
 * USB Shifter of course. I can't guarantee it will work on all usb shifters. (What I used - [link](Images/USB%20Shifter.jpg "USB Shifter"))
   * You can find these by typing in "USB Shifter" on ebay or aliexpress. Pick the one that suits you.
 
+## Instructions (WIP)
+### Wiring Diagram
+![Shifter Wiring Diagram](https://user-images.githubusercontent.com/40465008/220298924-f1d8d9e6-49c0-4f19-8c90-9cfb2f58f659.jpg)
+
+### Board Mount Image
+![IMG_20230221_194732](https://user-images.githubusercontent.com/40465008/220299141-47d3c65f-ebee-4849-89ef-2da4a68b6270.jpg)
 
 Basically flash ino file and change code to debug for USB codes in the serial plotter. Hopefully the code comments provide enough info to get an idea. Then just change codes where required and hopefully it works. I'm not that great with code in the grand schemes of things, but I will help where I can.
 
