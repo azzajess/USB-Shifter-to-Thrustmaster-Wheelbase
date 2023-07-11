@@ -1,5 +1,6 @@
 # USB Shifter to Thrustmaster Wheelbase
 Use a Generic USB Shifter to connect to a Thrustmaster wheelbase, Emulating a TH8A shifter which will work on console!
+This allows for compatibility with wheelbase while also retaining PC plug and play functionality.
 
 Might work on other wheelbases but have only tested it on a T300 RS GT + PS4 (GT7)
 
