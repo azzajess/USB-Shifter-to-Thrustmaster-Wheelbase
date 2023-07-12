@@ -118,7 +118,6 @@ void loop() {
     setHMode(true);
     switchHGear(1);
     sendCommand();
-    Serial.print("Gear 1");
   }
 
   //Gear 2
@@ -126,7 +125,6 @@ void loop() {
     setHMode(true);
     switchHGear(2);
     sendCommand();
-    Serial.print("Gear 2");
   }
 
   //Gear 3
@@ -134,7 +132,6 @@ void loop() {
     setHMode(true);
     switchHGear(3);
     sendCommand();
-    Serial.print("Gear 3");
   }
 
   //Gear 4
@@ -142,7 +139,6 @@ void loop() {
     setHMode(true);
     switchHGear(4);
     sendCommand();
-    Serial.print("Gear 4");
   }
 
   //Gear 5
@@ -150,7 +146,6 @@ void loop() {
     setHMode(true);
     switchHGear(5);
     sendCommand();
-    Serial.print("Gear 5");
   }
 
   //Gear 6
@@ -158,7 +153,6 @@ void loop() {
     setHMode(true);
     switchHGear(6);
     sendCommand();
-    Serial.print("Gear 6");
 
     //    Gear 7 (My shifter doesnt have 7th gear so this has to be filled out if you have one)
     //    } else if (evt->y == ){
