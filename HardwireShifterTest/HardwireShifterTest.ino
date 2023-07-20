@@ -1,22 +1,8 @@
-
-
 #include <Wire.h>
 
-
-
-
-
-/*
-Arduino 3.3V required or 5V with external power.
-
-Base connector / note / Arduino pin
-DIN6_1 /  nothing      /
-DIN6_2 /  I2C-SCL      / A5
-DIN6_3 /  /Shifter ON  / GND
-DIN6_4 /  I2C-SDA      / A4
-DIN6_5 /  Vdd          / RAW 3.3V
-DIN6_6 /  Vss          / GND
-*/
+const int gearPins[] = {2, 3, 4, 5, 6, 7, 8, 9};
+const int seqSwitchPin = 10;
+const int debounceDelay = 50; // Adjust this value as needed
 
 //commands seen from ociliscope in ISRTV forum - 
 //apparently these codes have changed for different wheel versions however
@@ -45,28 +31,30 @@ enum position {
   up = 0x06
 };
 
+//bool active = false;
+bool prevSequentialMode = false;
+byte prevSelectedGear = 0;
+position prevSequentialGear = center;
 
 
 void setup() {
-  //configure pins as input with pullup resistor allowing for switches to be connected
-  //between pins and ground.
-  pinMode(2, INPUT_PULLUP); //Gear 1
-  pinMode(3, INPUT_PULLUP); //Gear 2
-  pinMode(4, INPUT_PULLUP); //Gear 3
-  pinMode(5, INPUT_PULLUP); //Gear 4
-  pinMode(6, INPUT_PULLUP); //Gear 5
-  pinMode(7, INPUT_PULLUP); //Gear 6
-  pinMode(8, INPUT_PULLUP); //Reverse
+  for (int i = 0; i < 8; i++) {
+    pinMode(gearPins[i], INPUT_PULLUP);
+  }
+  pinMode(seqSwitchPin, INPUT_PULLUP);
+  
   Wire.begin(0x03); // join i2c bus (address optional for master)
   Serial.begin(115200);
   Serial.println("START");
   digitalWrite(13, HIGH);
 
-  //On startup sends command neutral to initialise this. It isnt nessacary but
-  //saves from moving to shift and back. Just be mindful of sequential switch i guess
+  //On startup sends command neutral to initialize this. It isn't necessary, but
+  //saves from moving to shift and back. Just be mindful of the sequential switch, I guess.
   setHMode(true);
   switchHGear(0);
-  sendCommand(); 
+  sendCommand();
+
+  prevSequentialMode = digitalRead(seqSwitchPin) == LOW;
 }
 
 //H mode shifting codes
@@ -89,6 +77,7 @@ void switchHGear(byte gear) { // Gear num 0-N, 8-R
 //Switchs gear to specificed gear number and display in serial monitor
 void switchSGear(position currpos) {
   command[4] = currpos;
+  //Serial.println(currpos);
 }
 
 //sends command over PS2 port to T300 wheelbase
@@ -109,101 +98,49 @@ void tryByte(byte nbyte, byte nbit) {
 }
 
 void loop() {
-//read the pushbutton value into a variable
-//int sensorVal = digitalRead(2);
-   
-  
-  //Gear 1
-  if (digitalRead(2) == LOW) {
+  bool sequentialMode = digitalRead(seqSwitchPin) == LOW;
+  bool gearPressed = false;
+  byte selectedGear = 0;
+  position sequentialGear = center;
+
+  if (sequentialMode) {
+    if (digitalRead(gearPins[2]) == LOW) {
+      sequentialGear = down;
+      gearPressed = true;
+    } else if (digitalRead(gearPins[3]) == LOW) {
+      sequentialGear = up;
+      gearPressed = true;
+    } else {
+      sequentialGear = center;
+    }
+    setHMode(false);
+  } else {
+    for (int i = 0; i < 8; i++) {
+      if (digitalRead(gearPins[i]) == LOW) {
+        selectedGear = i + 1;
+        gearPressed = true;
+        setHMode(true);
+        break;
+      }
+    }
+  }
+
+  if (!gearPressed) {
+    selectedGear = 0;
     setHMode(true);
-    switchHGear(1);
+  }
+
+  if (sequentialMode && (sequentialMode != prevSequentialMode || sequentialGear != prevSequentialGear)) {
+    switchSGear(sequentialGear);
+    sendCommand();
+  } else if (!sequentialMode && (selectedGear != prevSelectedGear)) {
+    switchHGear(selectedGear);
     sendCommand();
   }
 
-  //Gear 2
-  else if (digitalRead(3) == LOW) {
-    setHMode(true);
-    switchHGear(2);
-    sendCommand();
-  }
+  prevSequentialMode = sequentialMode;
+  prevSelectedGear = selectedGear;
+  prevSequentialGear = sequentialGear;
 
-  //Gear 3
-  else if (digitalRead(4) == LOW) {
-    setHMode(true);
-    switchHGear(3);
-    sendCommand();
-  }
-
-  //Gear 4
-  else if (digitalRead(5) == LOW) {
-    setHMode(true);
-    switchHGear(4);
-    sendCommand();
-  }
-
-  //Gear 5
-  else if (digitalRead(6) == LOW) {
-    setHMode(true);
-    switchHGear(5);
-    sendCommand();
-  }
-
-  //Gear 6
-  else if (digitalRead(7) == LOW) {
-    setHMode(true);
-    switchHGear(6);
-    sendCommand();
-
-    //    Gear 7 (My shifter doesnt have 7th gear so this has to be filled out if you have one)
-    //    } else if (evt->y == ){
-    //      setHMode(true);
-    //      switchHGear(7);
-    //      sendCommand();
-  }
-
-  //Gear 8/Reverse
-  else if (digitalRead(8) == LOW) {
-    setHMode(true);
-    switchHGear(8);
-    sendCommand();
-    Serial.print("Reverse");
-  }
-
-  // //Switch enable = Sequential mode
-  // else if (evt->y == 8207) {
-  // setHMode(false);
-  // switchSGear(center);
-  // sendCommand();
-  // }
-
-  // //Sequential Switch on = Shift up
-  // else if (evt->y == 8335) {
-  // setHMode(false);
-  // switchSGear(up);
-  // sendCommand();
-  // }
-
-  // //Sequential Switch on = Shift down
-  // else if (evt->y == 8271) {
-  // setHMode(false);
-  // switchSGear(down);
-  // sendCommand();
-  // }
-
-  //Neutral/Gear0
-  //if no other buttons are being activated then it must(?) be in neutral
-  else {
-    setHMode(true);
-    switchHGear(0);
-    sendCommand();
-    Serial.print("Neutral");
-  }
-
-// States
-  //setHMode(true);   // Set to H-mode
-  //switchHGear(3);   // Gear 3
-  //setHMode(false);  // Set to Seq-mode
-  //switchSGear(up);  // Press up
-  //sendCommand();
-  //Serial.println("Complete");
+  delay(debounceDelay);
 }
