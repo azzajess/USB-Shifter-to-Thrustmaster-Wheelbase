@@ -3,7 +3,7 @@ This method involves opening up the shifter and identifying the pins and corresp
 
 ## Requirements
 * Arduino Pro Mini 328 - 3.3V/8MHz (It has to be 3v3 volts to power off of the wheelbase easily)
-* USB to TTL Serial for flashing ino.
+* USB to TTL Serial for flashing ino ([HardwireShifter2PS2.ino](/HardwireShifter2PS2/HardwireShifter2PS2.ino "HardwireShifter2PS2.ino"))
 * Mini-Din/PS2 plug (for plugging into the wheelbase.)
 * Dupont connector Male to Female (If you don't want to solder wires)
 * Multimeter (to identify which gear is which pin)
