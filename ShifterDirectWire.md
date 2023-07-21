@@ -23,7 +23,7 @@ Below is my shifters pinout. Yours may vary.
 ![Pinout of Shifter PCB 6+R+switch Ver](https://github.com/azzajess/USB-Shifter-to-Thrustmaster-Wheelbase/assets/40465008/bc0d2ea4-aaf2-4b70-ab95-aa42036b9a00)
 
 ## Connecting Wires & Modifying code
-The code shouldnt require any interveration or changes as long as you connect the pins switches to the correct audrino pins. Refer to the diagram below for connecting the pins from the shiter to the Arduino and what pins to connect the PS2 plug to. The common ground of the shifter pins should be connected to a ground on the Arduino.
+The code shouldnt require any intervention or changes as long as you connect the pins switches to the correct arduino pins. Refer to the diagram below for connecting the pins from the shifter to the Arduino and what pins to connect the PS2 plug to. The common ground of the shifter pins should be connected to a ground on the Arduino.
 
 ### Wiring Diagram
 
