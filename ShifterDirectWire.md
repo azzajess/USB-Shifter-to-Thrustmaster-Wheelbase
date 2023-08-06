@@ -29,6 +29,18 @@ The code shouldnt require any intervention or changes as long as you connect the
 
 ![Hardwire Shifter Wiring DiagramL](https://github.com/azzajess/USB-Shifter-to-Thrustmaster-Wheelbase/assets/40465008/d3780173-6143-4a0a-9bc5-9cf9eb9b1583)
 
+Looking at the diagram above, you have to wire the Mini-Din/PS2 plug wires to the Arduino.
+
+```
+Base connector / note          / Arduino pin
+DIN6_1         /  nothing      /
+DIN6_2         /  I2C-SCL      / A5
+DIN6_3         /  /Shifter ON  / GND
+DIN6_4         /  I2C-SDA      / A4
+DIN6_5         /  Vdd          / RAW 3.3V
+DIN6_6         /  Vss          / GND
+```
+
 
 ### Connection to PC before flashing
 Just make sure the programmer is set to 3v3 and not 5v as you may damage the arduino & shield since it only supports 3v3 without modification. Connect up the programmers 3v3, Gnd, TX & RX to the pro mini with the shield on the bottom. And flash away. We will be using the connection for debugging.
