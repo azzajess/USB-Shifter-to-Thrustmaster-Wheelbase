@@ -16,6 +16,18 @@ NOTE: This method can be unreliable and I cannot guarantee it will work with you
 ### Wiring Diagram
 ![Shifter Wiring Diagram](https://user-images.githubusercontent.com/40465008/220298924-f1d8d9e6-49c0-4f19-8c90-9cfb2f58f659.jpg)
 
+Looking at the diagram above, you have to wire the Mini-Din/PS2 plug wires to the Arduino.
+
+```
+Base connector / note          / Arduino pin
+DIN6_1         /  nothing      /
+DIN6_2         /  I2C-SCL      / A5
+DIN6_3         /  /Shifter ON  / GND
+DIN6_4         /  I2C-SDA      / A4
+DIN6_5         /  Vdd          / RAW 3.3V
+DIN6_6         /  Vss          / GND
+```
+
 ### Board Mount Image
 ![IMG_20230221_194732](https://user-images.githubusercontent.com/40465008/220299141-47d3c65f-ebee-4849-89ef-2da4a68b6270.jpg)
 
