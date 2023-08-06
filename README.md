@@ -6,8 +6,14 @@ Might work on other wheelbases but have only tested it on a T300 RS GT + PS4 (GT
 
 IRTV Forums suggest it will also work on TMX wheelbase. It might work on any wheelbase that uses the TH8A Mini-Din (PS2) port
 
+## Pre-requisuite Knowledge
+* You will need to know how to solder wires
+* Flash Arduino with TTL Adaptor
+* Know how to import a libary into Arduino IDE
+* Comment/uncomment code and read from serial monitor in Arduino IDE
+
 ## Hardwire or USB Shield?
-Clicking the link will take you to the instructions page
+Clicking the link will take you to the instructions page showing you whats required, how to 
 ### [Hardwire](ShifterDirectWire.md)
 This method involves opening up the shifter and identifying the pins and corresponding microswitches so we can directly wire them to the arduino.
 This is a more permanent solution and you will lose the USB functionality due to having to remove the USB microcontroller in the shifter to easily access the pins. It is possible to retain both in the shifter with a bit of fiddling and work, but I won't be going through that in this guide.
