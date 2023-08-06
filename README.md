@@ -15,6 +15,16 @@ This is a more permanent solution and you will lose the USB functionality due to
 This allows for compatibility with the wheelbase while also retaining PC USB plug and play functionality. (as it retains USB cable that can be unplugged from shield)
 This is more of a 'plug and play' solution as nothing is permanently attached or removed. Unfortunately I have gotten a report thus far that it hasn't worked for them (more info in discussions and in the documentation) so your mileage may vary. USB shifters are not all made the same way, which can introduce variables. I have had success with this method however on my 6+R+switch Shifter. So, let me know how you go with this method should you try it.
 
+## Print or Cut your own Shifter Top Plates!
+I have also made up faceplates that closely match the original top plates!
+These come in 6+R, 7+R and switch versions that can be both 3d printed or laser cut (dxf files)
+
+You can find more details and downloads to these below
+* Thingiverse - https://www.thingiverse.com/thing:6157415
+* Printables - https://www.printables.com/model/545213-usb-shifter-top-plate
+And the original Onshape sketch here
+https://cad.onshape.com/documents/a3d9d44c33b1132797555d44/w/ee8f103d1e1c9a353ae6a04f/e/e706485c28816b59edb06570?renderMode=0&uiState=64cf4ada2f1e726c453e6d22
+
 ## Disclaimer
 Look, this is really hastily put together. I really wasnt happy with the lack of documentation for my dumb brain to comprehend so I used a Shield example that got me 90% of the way there and then piggy backed off that.
 
