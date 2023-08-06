@@ -22,7 +22,10 @@ These come in 6+R, 7+R and switch versions that can be both 3d printed or laser 
 You can find more details and downloads to these below
 * Thingiverse - https://www.thingiverse.com/thing:6157415
 * Printables - https://www.printables.com/model/545213-usb-shifter-top-plate
+
+
 And the original Onshape sketch here
+
 https://cad.onshape.com/documents/a3d9d44c33b1132797555d44/w/ee8f103d1e1c9a353ae6a04f/e/e706485c28816b59edb06570?renderMode=0&uiState=64cf4ada2f1e726c453e6d22
 
 ## Disclaimer
