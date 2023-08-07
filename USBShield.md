@@ -1,7 +1,7 @@
 # USB Shifter to Thrustmaster Wheelbase
 This allows for compatibility with wheelbase while also retaining PC plug and play functionality. (as it retains USB cable that can be unplugged from shield)
 
-NOTE: This method can be unreliable and I cannot guarantee it will work with your shifter. @NikderNoob95 has kindly tested out the USB shield method on his 6+R USB Shifter but was unable to get it to work. The microcontroller in his shifter was different to the one I am using. If you have a shifter with a microcontroller that uses a type c port on the inside of the unit, this method may not work. Regardless, let me know how you go in the discussions if you attempt this method!
+NOTE: I cannot guarantee this method will work with your shifter. @NikderNoob95 has kindly tested out the USB shield method on his 6+R USB Shifter but was unable to get it to work. The microcontroller in his shifter was different to the one I am using. If you have a shifter with a microcontroller that uses a type c port on the inside of the unit, this method may not work. Regardless, let me know how you go in the discussions if you attempt this method!
 
 ## Required
 * Arduino Pro Mini 328 - 3.3V/8MHz (It has to be 3v3 volts to power off of the wheelbase easily)
