@@ -5,7 +5,7 @@
  *  People at ISRTV.com - https://www.isrtv.com/forums/topic/24532-gearbox-connector-on-base/
  *  
  *  Modified by azzajess to suit USB Shifter 6+R+Switch (https://github.com/azzajess/USB-Shifter-to-Thrustmaster-Wheelbase)
- *  
+ *  v1.2
 */
 
 #include <usbhid.h>
@@ -171,88 +171,40 @@ void JoystickEvents::OnGamePadChanged(const GamePadEventData *evt)
 
 */
     
-    //Neutral/Gear0    
-    if (evt->y == 15){ 
-      setHMode(true);
-      switchHGear(0);
-      sendCommand();
-    } 
-    
-      //Gear 1
-      else if (evt->y == 31){
-      setHMode(true);
-      switchHGear(1);
-      sendCommand();
-      }
-      
-      //Gear 2 
-      else if (evt->y == 47){
-      setHMode(true);
-      switchHGear(2);
-      sendCommand();  
-      } 
-      
-      //Gear 3
-      else if (evt->y == 79){
-      setHMode(true);
-      switchHGear(3);
-      sendCommand();
-      } 
-      
-      //Gear 4
-      else if (evt->y == 143){
-      setHMode(true);
-      switchHGear(4);
-      sendCommand();
-      } 
-      
-      //Gear 5
-      else if (evt->y == 271){
-      setHMode(true);
-      switchHGear(5);
-      sendCommand();
-      } 
-      
-      //Gear 6
-      else if (evt->y == 527){
-      setHMode(true);
-      switchHGear(6);
-      sendCommand();
-      
-//    Gear 7 (My shifter doesnt have 7th gear so this has to be filled out if you have one)
-//    } else if (evt->y == ){
-//      setHMode(true);
-//      switchHGear(7);
-//      sendCommand();
-      } 
-      
-      //Gear 8/Reverse      
-      else if (evt->y == 2063){
-      setHMode(true);
-      switchHGear(8);
-      sendCommand();
-      }
-      
-      //Switch enable = Sequential mode
-      else if (evt->y == 8207) {
-      setHMode(false);
-      switchSGear(center);
-      sendCommand();
-      }
-      
-      //Sequential Switch on = Shift up      
-      else if (evt->y == 8335) {
-      setHMode(false);
-      switchSGear(up);
-      sendCommand();
-      }
-      
-      //Sequential Switch on = Shift down
-      else if (evt->y == 8271) {
-      setHMode(false);
-      switchSGear(down);
-      sendCommand();
-      }
+  //check if any of the keypad codes are the sequential commands
+  //replace as necessary.
+  bool isSequential = (evt->y == 8207 || evt->y == 8271 || evt->y == 8335); // Sequential mode range
+  uint8_t gear = 0; // Gear 0 (neutral) by default
+
+  if (!isSequential) {
+    // H-Mode gear selection
+    setHMode(true);
+
+    // Gear mapping based on evt->y value for H-mode
+    //change values depending on your shifter (if its different)
+    if (evt->y == 31)      gear = 1;
+    else if (evt->y == 47) gear = 2;
+    else if (evt->y == 79) gear = 3;
+    else if (evt->y == 143) gear = 4;
+    else if (evt->y == 271) gear = 5;
+    else if (evt->y == 527) gear = 6;
+    else if (evt->y == 1039) gear = 7;
+    else if (evt->y == 2063) gear = 8; // Reverse
+     
+
+    switchHGear(gear);
+  }
+  else {
+    // Sequential mode gear selection
+    setHMode(false);
+    //gear mapping based off evt->y in S-mode
+    if (evt->y == 8335)      switchSGear(up);    // Shift up
+    else if (evt->y == 8271) switchSGear(down);  // Shift down
+    else                     switchSGear(center); // Neutral
+  }
+
+  
+  sendCommand();
 
 /*
       Debug/Code Find Section
