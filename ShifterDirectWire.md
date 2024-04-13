@@ -32,13 +32,14 @@ The code shouldnt require any intervention or changes as long as you connect the
 Looking at the diagram above, you have to wire the Mini-Din/PS2 plug wires to the Arduino.
 
 ```
-Base connector / note          / Arduino pin
-DIN6_1         /  nothing      /
-DIN6_2         /  I2C-SCL      / A5
-DIN6_3         /  /Shifter ON  / GND
-DIN6_4         /  I2C-SDA      / A4
-DIN6_5         /  Vdd          / RAW 3.3V
-DIN6_6         /  Vss          / GND
+Base connector   /  Note         / Arduino pin
+DIN6_1           /  nothing      /
+DIN6_2           /  I2C-SCL      / A5
+DIN6_3           /  /Shifter ON  / GND
+DIN6_4           /  I2C-SDA      / A4
+DIN6_5           /  Vdd          / RAW 3.3V
+DIN6_6           /  Vss          / GND
+DIN Metal Chasis /  nothing      / GND
 ```
 
 
