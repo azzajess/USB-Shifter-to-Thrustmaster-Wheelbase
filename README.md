@@ -5,6 +5,7 @@ This allows for compatibility with wheelbase while also retaining PC plug and pl
 Might work on other wheelbases but have only tested it on a T300 RS GT + PS4 (GT7)
 
 IRTV Forums suggest it will also work on TMX wheelbase. It might work on any wheelbase that uses the TH8A Mini-Din (PS2) port
+(had a report of TS-XW wheelbase not playing nice? Let me know how you go)
 
 ## Pre-requisuite Knowledge
 * You will need to know how to solder wires
